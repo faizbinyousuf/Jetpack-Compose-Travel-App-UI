@@ -31,10 +31,6 @@ class MainActivity : ComponentActivity() {
 }
 
 
-@Composable
-fun HomeScreen() {
-	Text(text = "Home Screen")
-}
 
 @Composable
 fun OrdersScreen() {

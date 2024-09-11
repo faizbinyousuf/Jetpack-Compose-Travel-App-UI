@@ -1,4 +1,4 @@
-package com.example.travelapp.features.auth
+package com.example.travelapp.features.auth.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -90,8 +90,8 @@ fun HeaderLogo() {
 		painter = painter, contentDescription = null,
 		
 		modifier = Modifier
-			.padding(top = 60.dp)
-			.height(150.dp)
+			.padding(top = 40.dp)
+			.height(120.dp)
 			.fillMaxWidth()
 	     )
 }
