@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,7 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -49,6 +52,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.CommonAppBar
 import com.example.travelapp.common.components.CommonYellowButton
+import com.example.travelapp.common.components.ElevatedTextField
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -57,6 +61,7 @@ fun SendScreen(
 	navController: NavHostController
               ) {
 	var context = LocalContext.current
+	var scrollState = rememberScrollState()
 	
 	Surface(
 		color = Color.White
@@ -68,7 +73,9 @@ fun SendScreen(
 				modifier = Modifier
 					.fillMaxSize()
 					.padding(it)
-					.padding(horizontal = 15.dp),
+					.padding(horizontal = 15.dp)
+					.verticalScroll(scrollState)
+				,
 				horizontalAlignment = Alignment.CenterHorizontally,
 				verticalArrangement = Arrangement.spacedBy(12.dp)
 			      ) {                //BoxImage()
@@ -79,11 +86,13 @@ fun SendScreen(
 						fontWeight = FontWeight.W300
 					                                                ),
 					
-					)            //	ItemDropDown()
+					)
+				BoxImage()
+				//	ItemDropDown()
 				
 				ItemImageContainer()
 				
-				//ElevatedTextField()
+				
 				ItemDescriptionTextField("Item Description")
 				ElevatedTextField(
 					"Approximate value in $", icon = R.drawable.dollar_svg
@@ -214,51 +223,6 @@ fun ItemImageContainer() {
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ElevatedTextField(label: String = "Enter text here", icon: Int, modifier: Modifier = Modifier) {
-	var text by remember { mutableStateOf(TextFieldValue("")) }
-	
-	TextField(
-		value = text,
-		onValueChange = { text = it },
-		modifier = modifier
-			.fillMaxWidth() //			.padding(10.dp)
-			.shadow(
-				elevation = 2.dp, // Set elevation here
-				shape = RoundedCornerShape(8.dp),
-				clip = true // Ensure the shadow is clipped to the shape
-			       )
-			.background(
-				color = Color.White, shape = RoundedCornerShape(8.dp)
-			           )
-			.border(width = 1.dp, color = Color(0xFFCDC9C9), shape = RoundedCornerShape(8.dp)),
-		
-		shape = RoundedCornerShape(8.dp),
-		colors = TextFieldDefaults.colors(
-			focusedContainerColor = Color.Transparent,
-			unfocusedContainerColor = Color.Transparent,
-			disabledContainerColor = Color.Transparent,
-			focusedIndicatorColor = Color.Transparent, // Remove default underline
-			unfocusedIndicatorColor = Color.Transparent,
-		                                 ),
-		placeholder = {
-			Text(text = label)
-		},
-		trailingIcon = {
-			
-				Icon(
-					painter = painterResource(id = icon),
-					contentDescription = "send",
-					modifier = Modifier //						.align(Alignment.TopEnd) // Align to the top right corner
-						.padding(8.dp)
-						.size(22.dp)
-				    )
-			
-		}
-		
-		)
-}
 
 @Composable
 private fun ItemDropDown() {
@@ -298,7 +262,7 @@ private fun BoxImage() {
 		modifier = Modifier
 			.padding(20.dp)
 			.fillMaxWidth()
-			.height(200.dp)
+			.height(120.dp)
 	     )
 }
 
