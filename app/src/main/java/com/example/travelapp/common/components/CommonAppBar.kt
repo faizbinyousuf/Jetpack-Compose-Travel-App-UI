@@ -8,8 +8,11 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -18,7 +21,13 @@ import com.example.travelapp.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CommonAppBar(showImage: Boolean = false, title: String = "") {
-	CenterAlignedTopAppBar(modifier = Modifier.padding(horizontal = 15.dp), title = {
+	CenterAlignedTopAppBar(
+		
+		colors = TopAppBarDefaults.topAppBarColors(
+			containerColor = Color.Transparent
+												  ),
+		
+		modifier = Modifier.padding(horizontal = 15.dp), title = {
 		if (showImage) {
 			var painter = painterResource(id = R.drawable.logo_header_home)
 			

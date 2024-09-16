@@ -26,7 +26,19 @@ fun TravelAppNavHost(navController: NavHostController) {
 		
 		
 		
+		
+		
+		
+		
 		composable("send") { SendScreen( navController = navController ) }
 		composable("Settings") { ProfileScreen() }
+		
+		
+		
+		
+		/// routes for sending item
+		
+		
+		
 	}
 }

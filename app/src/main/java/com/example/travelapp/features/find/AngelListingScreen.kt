@@ -190,37 +190,3 @@ fun AngelListingScreenPreview() {
 	
 }
 
-
-@Composable
-fun CardWithoutTonalElevation(
-	modifier: Modifier = Modifier,
-	shape: Shape = CardDefaults.shape,
-	colors: Color = White,
-	border: BorderStroke? = null,
-	elevation: Dp = 0.dp,
-	content: @Composable ColumnScope.() -> Unit = {}
-                             )  {
-	val gradient = Brush.linearGradient(
-		colors = listOf(
-			Color(0xFFF1F1F5), Color.Red))
-	
-	val gradient2 = Brush.linearGradient(
-		colors = listOf(
-			Color(0xFFF1F1F5), // Light gray or light purple on the left side
-			Color.White // White on the right side
-		               ),
-		start = Offset(0f, 0f), // Start at the left
-		end = Offset(Float.POSITIVE_INFINITY, 0f) // End at the right
-	                                   )
-	
-	Surface(
-		modifier = modifier,
-		shape = shape,
-		color = colors,
-		tonalElevation = 0.dp,
-		shadowElevation = elevation,
-		border = border,
-	       ) {
-		Column(content = content, modifier = Modifier.background(gradient2),)
-	}
-}

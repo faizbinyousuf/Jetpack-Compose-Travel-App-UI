@@ -33,7 +33,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.travelapp.R
-import com.example.travelapp.features.find.CardWithoutTonalElevation
+import com.example.travelapp.common.components.CardWithoutTonalElevation
+
 
 @Composable
 fun FindAngelCard() {
