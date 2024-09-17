@@ -8,7 +8,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,42 +23,45 @@ fun CommonAppBar(showImage: Boolean = false, title: String = "") {
 	CenterAlignedTopAppBar(
 		
 		colors = TopAppBarDefaults.topAppBarColors(
-			containerColor = Color.Transparent
-												  ),
+			containerColor = Color.Transparent),
 		
-		modifier = Modifier.padding(horizontal = 15.dp), title = {
-		if (showImage) {
-			var painter = painterResource(id = R.drawable.logo_header_home)
+		modifier = Modifier
+			
+			.padding(horizontal = 15.dp),
+//			.height(64.dp),
+		
+		title = {
+			if (showImage) {
+				var painter = painterResource(id = R.drawable.logo_header_home)
+				
+				Image(
+					painter = painter, contentDescription = null, contentScale = ContentScale.Fit,
+					
+					modifier = Modifier
+						.width(120.dp)
+						.height(60.dp)
+					 )
+			}
+			else {
+				Text(text = title, style = MaterialTheme.typography.titleSmall)
+			}
+			
+			
+		}, navigationIcon = {
+			if (!showImage) {
+				var svgIcon = painterResource(id = R.drawable.back_arrow_svg)
+				Image(painter = svgIcon, contentDescription = null)
+				
+			}
+			
+		}, actions = {
+			var painter = painterResource(id = R.drawable.menu_icon_png)
 			
 			Image(
 				painter = painter, contentDescription = null, contentScale = ContentScale.Fit,
 				
 				modifier = Modifier
-					.width(120.dp)
-					.height(60.dp)
-			     )
-		}
-		else {
-			Text(text = title, style = MaterialTheme.typography.titleSmall)
-		}
-		
-		
-	}, navigationIcon = {
-		if (!showImage){
-			var svgIcon = painterResource(id = R.drawable.back_arrow_svg)
-			Image(painter = svgIcon, contentDescription = null)
-			
-		}
-		
-	}, actions = {
-		var painter = painterResource(id = R.drawable.menu_icon_png)
-		
-		Image(
-			painter = painter, contentDescription = null, contentScale = ContentScale.Fit,
-			
-			modifier = Modifier
-				.width(25.dp)
-				.height(25.dp)
-		     )
-	})
+					.width(25.dp)
+					.height(25.dp))
+		})
 }

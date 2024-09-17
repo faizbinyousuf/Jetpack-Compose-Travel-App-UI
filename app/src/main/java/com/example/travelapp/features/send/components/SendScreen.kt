@@ -1,6 +1,7 @@
 package com.example.travelapp.features.send.components
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -63,6 +64,14 @@ fun SendScreen(
 	var context = LocalContext.current
 	var scrollState = rememberScrollState()
 	
+	
+	BackHandler {
+		navController.navigate("mainScreen"){
+			popUpTo(0) { inclusive = true }
+			launchSingleTop = true
+		}
+	}
+	
 	Surface(
 		color = Color.White
 	       ) {
@@ -122,9 +131,13 @@ fun SendScreen(
 				}
 				
 				CommonYellowButton(
-					text = "DONE", onClick = { /*TODO*/ },
+					text = "DONE", onClick = {
+						navController.navigate("findAngels")
+					},
 					
-					modifier = Modifier.fillMaxWidth()
+					modifier = Modifier.
+					padding(top = 15.dp, bottom = 30.dp).
+					fillMaxWidth()
 					
 					
 								  

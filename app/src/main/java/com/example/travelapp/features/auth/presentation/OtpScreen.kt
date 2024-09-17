@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.common.components.CommonYellowButton
@@ -32,7 +33,7 @@ import com.example.travelapp.features.auth.components.TopHeaderCurvedImage
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
-fun OtpScreen(navHostController: NavHostController) {
+fun OtpScreen(navController: NavHostController) {
 	Surface(
 		color = Color.White,
 	       ) {
@@ -91,7 +92,10 @@ fun OtpScreen(navHostController: NavHostController) {
 				Spacer(modifier = Modifier.height(100.dp))
 				CommonYellowButton(
 					text = "VERIFY", onClick = {
-						navHostController.navigate("login")
+						navController.navigate("mainScreen"){
+							popUpTo(0) { inclusive = true }
+							launchSingleTop = true
+						}
 					},
 				                  )
 			}
@@ -103,7 +107,7 @@ fun OtpScreen(navHostController: NavHostController) {
 @Composable
 fun OtpScreenPreview() {
 	TravelAppTheme{
-		OtpScreen(navHostController = rememberNavController())
+		OtpScreen(navController = rememberNavController())
 	}
 	
 }

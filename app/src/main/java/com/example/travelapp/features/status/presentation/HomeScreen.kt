@@ -19,12 +19,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -40,48 +38,43 @@ import com.example.travelapp.common.components.CommonAppBar
 import com.example.travelapp.common.components.CommonYellowButton
 import com.example.travelapp.ui.theme.TravelAppTheme
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
 	val scrollState = rememberScrollState()
 	
-	Surface(
-		color = Color.White
-	       ) {
-		
-		Scaffold(topBar = {
-			CommonAppBar(showImage = true)
-		}
-		        
-		        ) {
-			Column(
-				modifier = Modifier
-					.padding(20.dp)
-					.fillMaxSize()
-					.verticalScroll(scrollState)
-				,
-				
-				horizontalAlignment = Alignment.Start
-			      ) {
-				TopImageSection()
-				Text("Welcome".uppercase(), style = MaterialTheme.typography.titleMedium)
-				Text(
-					"Let\'s get started", style = MaterialTheme.typography.titleLarge
-				    )
-				ActionItems()
-				HowItWorksSection()
-				CommonYellowButton(modifier = Modifier
-					.fillMaxWidth()
-					.padding(top = 15.dp),
-					text = "GET STARED",
-					onClick = {
+	
+	
+	Scaffold(topBar = {
+		CommonAppBar(showImage = true)
+	}
+	        
+	        ) {
+		Column(
+			modifier = Modifier
+				.padding(it)
+				.padding(20.dp)
+				.fillMaxSize()
+				.verticalScroll(scrollState),
+			
+			horizontalAlignment = Alignment.Start) {
+			TopImageSection()
+			Text("Welcome".uppercase(), style = MaterialTheme.typography.titleMedium)
+			Text(
+				"Let\'s get started", style = MaterialTheme.typography.titleLarge)
+			ActionItems()
+			HowItWorksSection()
+			CommonYellowButton(modifier = Modifier
+				.fillMaxWidth()
+				.padding(top = 15.dp, bottom = 30.dp),
+				text = "GET STARED",
+				onClick = {
 					
-						
-					})
 				
-				
-			}
+				})
+			
+			
 		}
 	}
 	
@@ -91,18 +84,17 @@ fun HomeScreen(navController: NavHostController) {
 @Composable
 fun HowItWorksSection() {
 	var image = painterResource(id = R.drawable.how_it_works)
-	Column (
+	Column(
 		modifier = Modifier
 			.padding(top = 15.dp)
 			.fillMaxWidth()
-			
-		   ){
+	      
+	      ) {
 		Image(
 			painter = image,
 			contentDescription = "How it works",
 			contentScale = ContentScale.Crop,
-			modifier = Modifier.fillMaxWidth()
-		     )
+			modifier = Modifier.fillMaxWidth())
 	}
 	
 	
@@ -119,14 +111,11 @@ private fun ActionItems() {
 	   ) {
 		
 		ActionItemCard(
-			icon = R.drawable.send_icon, text = "Send"
-		              )
+			icon = R.drawable.send_icon, text = "Send")
 		ActionItemCard(
-			icon = R.drawable.trip_icon, text = "Transport"
-		              )
+			icon = R.drawable.trip_icon, text = "Transport")
 		ActionItemCard(
-			icon = R.drawable.trusted_circle_icon, text = "Trusted Circle"
-		              )
+			icon = R.drawable.trusted_circle_icon, text = "Trusted Circle")
 	}
 }
 
@@ -140,16 +129,14 @@ private fun ActionItemCard(icon: Int, text: String) {
 			.width(100.dp)
 			.padding(5.dp),
 		colors = CardDefaults.cardColors(
-			containerColor = colorResource(id = R.color.app_yellow)
-		                                )
+			containerColor = colorResource(id = R.color.app_yellow))
 	    
 	    ) {
 		
 		Column(
 			modifier = Modifier.fillMaxSize(),
 			horizontalAlignment = Alignment.CenterHorizontally,
-			verticalArrangement = Arrangement.Center
-		      ) {
+			verticalArrangement = Arrangement.Center) {
 			var painter = painterResource(id = icon)
 			Image(painter = painter, contentDescription = null)
 			Spacer(modifier = Modifier.height(12.dp))
@@ -157,8 +144,7 @@ private fun ActionItemCard(icon: Int, text: String) {
 				
 				text,
 				style = MaterialTheme.typography.bodyMedium.copy(
-					fontWeight = FontWeight.W500, fontSize = 11.sp
-				                                                ),
+					fontWeight = FontWeight.W500, fontSize = 11.sp),
 				textAlign = TextAlign.Center,
 			    )
 			
@@ -176,8 +162,7 @@ private fun TopImageSection() {
 		modifier = Modifier
 			.padding(top = 15.dp)
 			.fillMaxWidth()
-			.height(280.dp)
-	     )
+			.height(280.dp))
 }
 
 @Preview

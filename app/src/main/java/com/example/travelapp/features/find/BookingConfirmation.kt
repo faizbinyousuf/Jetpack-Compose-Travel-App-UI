@@ -21,12 +21,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.CommonYellowButton
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
-fun BookingConfirmation() {
+fun BookingConfirmation(
+	navController: NavHostController
+                       ) {
 	Scaffold(
 		containerColor = Color.White) {
 		Column(
@@ -58,11 +63,19 @@ fun BookingConfirmation() {
 				textAlign = TextAlign.Center,
 				
 				style = MaterialTheme.typography.headlineMedium.copy(
-					fontSize = 35.sp))
+					fontSize = 33.sp))
 			
 			Spacer(modifier = Modifier.height(200.dp))
 			
-			CommonYellowButton(text = "DONE", onClick = { /*TODO*/ }
+			CommonYellowButton(text = "DONE", onClick = {
+				
+				navController.navigate("mainScreen") {
+					popUpTo(0) { inclusive = true } // This will clear the entire back stack
+					launchSingleTop = true
+					
+				}
+				
+			}
 			                  
 			                  
 			                  )
@@ -75,6 +88,7 @@ fun BookingConfirmation() {
 @Preview
 fun PreviewBookingConfirmation() {
 	TravelAppTheme {
-		BookingConfirmation()
+		BookingConfirmation(
+			navController = rememberNavController())
 	}
 }

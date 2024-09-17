@@ -3,6 +3,7 @@ package com.example.travelapp.features.find.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,8 +50,13 @@ fun TripInfoCard(selected: Boolean, onClick: () -> Unit = {}) {
 		border =  if(selected) BorderStroke(3.dp, color = colorResource(id = R.color.app_yellow)) else null,
 		modifier = Modifier
 			.padding(top = 10.dp)
-			.fillMaxWidth(),
-		shape = RoundedCornerShape(16.dp),
+			.fillMaxWidth()
+			.clickable {
+				onClick()
+			}
+		,
+		shape = RoundedCornerShape(16.dp)
+		,
 		
 		//elevation = CardDefaults.cardElevation(3.dp)
 	    ) {
@@ -89,7 +95,7 @@ fun TripInfoCard(selected: Boolean, onClick: () -> Unit = {}) {
 						.padding(horizontal = 16.dp)
 						.clip(RoundedCornerShape(8.dp))
 						.background(Color.White)
-						.padding(horizontal = 24.dp, vertical = 8.dp),
+						.padding( vertical = 8.dp),
 					contentAlignment = Alignment.Center
 				   ) {
 					Column(horizontalAlignment = Alignment.CenterHorizontally) {

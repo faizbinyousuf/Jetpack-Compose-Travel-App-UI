@@ -24,6 +24,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.CardWithoutTonalElevation
 import com.example.travelapp.common.components.CommonAppBar
@@ -32,7 +34,9 @@ import com.example.travelapp.features.find.components.TripInfoCard
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
-fun BookingSummary() {
+fun BookingSummary(
+	navController: NavHostController
+				  ) {
 
 	Surface (
 		color = Color.White,
@@ -107,7 +111,9 @@ fun BookingSummary() {
 						}
 						Spacer(modifier =  Modifier .height(100.dp))
 						
-						CommonYellowButton(text = "SEND REQUEST", onClick = { /*TODO*/ })
+						CommonYellowButton(text = "SEND REQUEST", onClick = {
+							navController.navigate("bookingConfirmation")
+						})
 					}
 		}
 	}
@@ -118,7 +124,9 @@ fun BookingSummary() {
 @Preview
 fun BookingSummaryPreview() {
 	TravelAppTheme {
-		BookingSummary()
+		BookingSummary(
+			navController = rememberNavController()
+					  )
 	}
 
 }

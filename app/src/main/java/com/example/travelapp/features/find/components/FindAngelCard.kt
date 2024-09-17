@@ -2,6 +2,7 @@ package com.example.travelapp.features.find.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,7 +38,7 @@ import com.example.travelapp.common.components.CardWithoutTonalElevation
 
 
 @Composable
-fun FindAngelCard() {
+fun FindAngelCard(onClick: () -> Unit) {
 	val gradient = Brush.linearGradient(
 		colors = listOf(
 			Color(0xFFF1F1F5), Color.Red))
@@ -47,6 +48,7 @@ fun FindAngelCard() {
 	CardWithoutTonalElevation(
 		elevation = 3.dp,
 		modifier = Modifier.padding(horizontal = 15.dp, vertical = 10.dp)
+			.clickable(onClick = onClick)
 		
 		,
 		
@@ -61,6 +63,7 @@ fun FindAngelCard() {
 			var avatar = painterResource(id = R.drawable.home_header)
 			Box(
 				modifier = Modifier
+					
 					.padding(end = 10.dp)
 					.height(85.dp)
 					.width(85.dp)
@@ -79,6 +82,7 @@ fun FindAngelCard() {
 			}
 			
 			Column(
+				modifier = Modifier.weight(3f),
 				verticalArrangement = Arrangement.spacedBy(6.dp),
 				horizontalAlignment = Alignment.Start) {
 				Text(
@@ -132,7 +136,7 @@ fun FindAngelCard() {
 						"Pick up before 29 May 2021 at 10:00 pm",
 						style = MaterialTheme.typography.bodySmall.copy(
 							fontWeight = FontWeight.W500,
-							fontSize = 9.sp,
+							fontSize = 8.sp,
 							color = colorResource(id = R.color.app_gray)))
 					
 					
@@ -141,30 +145,38 @@ fun FindAngelCard() {
 				
 			}
 			
+			
 			Text(
 				"Favour",
+				modifier = Modifier
+					
+					.weight(1f)
+					.align(Alignment.Top)
+					
+					.height(20.dp)
+					.background(
+						color = colorResource(id = R.color.app_purple),
+						shape = RoundedCornerShape(10.dp))
+					.padding(horizontal = 8.dp, vertical = 4.dp),
+				
 				
 				style = MaterialTheme.typography.bodyMedium.copy(
 					fontWeight = FontWeight.W500, fontSize = 10.sp, color = Color.White),
 				
-				modifier = Modifier
-					.align(Alignment.Top)
-					.background(
-						color = colorResource(id = R.color.app_purple),
-						shape = RoundedCornerShape(10.dp))
-					.padding(horizontal = 8.dp, vertical = 4.dp)
-			    
-			    )
+				
+				)
+			
 			Icon(
 				painter = painterResource(id = R.drawable.green_arrow_svg),
+				
+				
 				contentDescription = null,
 				
 				modifier = Modifier
-					.offset(x = -20.dp)
+					.offset(x = -10.dp)
 					.size(13.dp)
 			    
 			    )
-			
 			
 			
 		}

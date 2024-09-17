@@ -56,7 +56,9 @@ fun LoginScreen(navHostController: NavHostController) {
 				Spacer(modifier = Modifier.height(100.dp))
 				
 				CommonYellowButton(
-					text = "SIGN IN", onClick = {},
+					text = "SIGN IN", onClick = {
+						navHostController.navigate("otpScreen")
+					},
 				                  )
 				Spacer(modifier = Modifier.height(30.dp))
 				SignUpText()

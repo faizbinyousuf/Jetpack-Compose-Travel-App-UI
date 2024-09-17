@@ -1,5 +1,6 @@
 package com.example.travelapp.features.find
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +35,12 @@ import com.example.travelapp.ui.theme.raleWay
 
 @Composable
 fun FindAngels(navController: NavHostController) {
-	
+	BackHandler {
+		navController.navigate("mainScreen"){
+			popUpTo(0) { inclusive = true }
+			launchSingleTop = true
+		}
+	}
 	Surface(
 		color = Color.White,
 		
@@ -111,7 +117,7 @@ fun FindAngels(navController: NavHostController) {
 				
 				CommonYellowButton(
 					text = "FIND YOUR ANGEL",
-					onClick = { /*TODO*/ },
+					onClick = { navController.navigate("angelListScreen") },
 					modifier = Modifier
 						.padding(top = 100.dp)
 						.fillMaxWidth()

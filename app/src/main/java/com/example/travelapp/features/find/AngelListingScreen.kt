@@ -48,13 +48,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.CommonAppBar
 import com.example.travelapp.features.find.components.FindAngelCard
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
-fun AngelListingScreen() {
+fun AngelListingScreen(navController: NavHostController) {
 	
 	Surface(
 		color = Color.White) {
@@ -71,9 +73,15 @@ fun AngelListingScreen() {
 				FilterSection()
 				CustomLineWithCircles()
 				StartAndDestination()
-			    LazyColumn {
-					items(3) {
-						FindAngelCard()
+			    LazyColumn(
+					modifier = Modifier.padding(bottom = 30.dp)
+						  ) {
+					items(5) {
+						FindAngelCard(
+							onClick = {
+								navController.navigate("knowAngel")
+							}
+									 )
 					}
 			    }
 				
@@ -185,7 +193,7 @@ private fun FilterSection() {
 fun AngelListingScreenPreview() {
 	
 	TravelAppTheme {
-		AngelListingScreen()
+		AngelListingScreen(navController = rememberNavController())
 	}
 	
 }

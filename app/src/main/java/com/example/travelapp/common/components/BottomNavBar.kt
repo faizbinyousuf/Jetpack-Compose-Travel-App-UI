@@ -38,14 +38,8 @@ import com.example.travelapp.R
 
 
 @Composable
-fun CustomBottomNavigation(modifier: Modifier = Modifier, navHostController: NavHostController) {
-	var selectedIndex by remember { mutableStateOf(0) }
-	
-	
-	val navBackStackEntry by navHostController.currentBackStackEntryAsState()
-	val currentDestination = navBackStackEntry?.destination
-	
-	
+fun CustomBottomNavigation( selectedIndex: Int,  onItemSelected : (Int) -> Unit,  selectedRoute: String, modifier: Modifier = Modifier, navHostController: NavHostController) {
+
 	
 	Box(
 		modifier = Modifier
@@ -64,33 +58,18 @@ fun CustomBottomNavigation(modifier: Modifier = Modifier, navHostController: Nav
 			BottomNavItem(
 				icon = R.drawable.home_icon, // Replace with your icons
 				label = "Status",
-				isSelected =  currentDestination?.route == "status",
-				onClick = {
-					navHostController.navigate("status") {
-						popUpTo(navHostController.graph.findStartDestination().id) {
-							saveState = true
-						}
-						launchSingleTop =
-							true								// Restore state when reselecting a previously selected item
-						restoreState = true
-					}
-				}
+				isSelected =  selectedIndex ==0,
+				onClick = { onItemSelected(0) }
+				
+			
 			             )
 			
 			BottomNavItem(
 				icon = R.drawable.send_icon, // Replace with your icons
 				label = "Send",
-				isSelected =  currentDestination?.route == "send",
-				onClick = {
-					navHostController.navigate("send") {
-						popUpTo(navHostController.graph.findStartDestination().id) {
-							saveState = true
-						}
-						launchSingleTop =
-							true								// Restore state when reselecting a previously selected item
-						restoreState = true
-					}
-				}
+				isSelected =  selectedIndex ==1,
+				onClick = { onItemSelected(1) }
+
 			             )
 			
 			// Empty space for the middle button
@@ -99,47 +78,51 @@ fun CustomBottomNavigation(modifier: Modifier = Modifier, navHostController: Nav
 			BottomNavItem(
 				icon = R.drawable.luggage_icon, // Replace with your icons
 				label = "My Luggage",
-				isSelected =  currentDestination?.route == "myluggage",
-				onClick = {
-					navHostController.navigate("myluggage") {
-						popUpTo(navHostController.graph.findStartDestination().id) {
-							saveState = true
-						}
-						launchSingleTop =
-							true								// Restore state when reselecting a previously selected item
-						restoreState = true
-					}
-				}
+				isSelected =  selectedIndex ==2,
+				onClick = { onItemSelected(2) }
+//				onClick = {
+//					onItemSelected("myluggage")
+////					navHostController.navigate("myluggage") {
+////						popUpTo(navHostController.graph.findStartDestination().id) {
+////							saveState = true
+////						}
+////						launchSingleTop =
+////							true								// Restore state when reselecting a previously selected item
+////						restoreState = true
+////					}
+//				}
 			             )
 			
 			BottomNavItem(
 				icon = R.drawable.trip_icon, // Replace with your icons
 				label = "Trips",
-				isSelected =  currentDestination?.route == "trips",
-				onClick = {
-					navHostController.navigate("trips") {
-						popUpTo(navHostController.graph.findStartDestination().id) {
-							saveState = true
-						}
-						launchSingleTop =
-							true								// Restore state when reselecting a previously selected item
-						restoreState = true
-					}
-				}
+				isSelected = selectedIndex ==3,
+				onClick = { onItemSelected(3) }
+//				onClick = {
+//					//onItemSelected(3)
+////					navHostController.navigate("trips") {
+////						popUpTo(navHostController.graph.findStartDestination().id) {
+////							saveState = true
+////						}
+////						launchSingleTop =
+////							true								// Restore state when reselecting a previously selected item
+////						restoreState = true
+////					}
+//				}
 			             )
 		}
 		
 		// Central Circular Button
 		FloatingActionButton(
 			onClick = {
-				navHostController.navigate("addTrip") {
-					popUpTo(navHostController.graph.findStartDestination().id) {
-						saveState = true
-					}
-					launchSingleTop =
-						true								// Restore state when reselecting a previously selected item
-					restoreState = true
-				}
+//				navHostController.navigate("addTrip") {
+//					popUpTo(navHostController.graph.findStartDestination().id) {
+//						saveState = true
+//					}
+//					launchSingleTop =
+//						true								// Restore state when reelecting a previously selected item
+//					restoreState = true
+//				}
 			},
 			shape = CircleShape,
 			containerColor = colorResource(id = R.color.app_yellow),
@@ -148,7 +131,7 @@ fun CustomBottomNavigation(modifier: Modifier = Modifier, navHostController: Nav
 				
 				.size(60.dp)
 				.align(Alignment.Center)
-				.offset(y = (-15).dp, x = -10.dp)
+				.offset(y = (-15).dp, x = (-10).dp)
 				
 			,
 			
@@ -165,6 +148,8 @@ fun CustomBottomNavigation(modifier: Modifier = Modifier, navHostController: Nav
 
 @Composable
 fun BottomNavItem(icon: Int, label: String, isSelected: Boolean, onClick: () -> Unit) {
+	println("ZZZZZ $isSelected  for  $label "  )
+	
 	Box {
 		Column(
 			modifier = Modifier

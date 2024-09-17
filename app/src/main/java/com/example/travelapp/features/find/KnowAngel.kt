@@ -39,13 +39,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.CommonAppBar
+import com.example.travelapp.common.components.CommonYellowButton
 import com.example.travelapp.features.find.components.TripInfoCard
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
-fun KnowAngel() {
+fun KnowAngel(
+	navController: NavHostController
+			 ) {
 	var isSelectedTrip by remember { mutableStateOf(false) }
 	var isSelectedUpComing by remember { mutableStateOf(false) }
 	Surface(
@@ -87,10 +92,13 @@ fun KnowAngel() {
 				Column(
 					modifier = Modifier
 						.padding(it)
-						.padding(15.dp)
+						.padding(
+							horizontal = 15.dp)
 						.fillMaxWidth()
 						.background(
-							color = Color.White),
+							color = Color.White)
+						
+					,
 					horizontalAlignment = Alignment.CenterHorizontally) {
 					
 					
@@ -164,11 +172,18 @@ fun KnowAngel() {
 				}
 				
 				
+				
+				
+				
+				
 				Surface(
-					color = Color(0xFFF5F5F5),
+					color =
+					Color(0xFFF5F5F5),
 					modifier = Modifier
-						.padding(top = 10.dp)
-						.fillMaxSize()) {
+						
+						.fillMaxWidth()
+						.offset(y = -30.dp)
+					   ) {
 					Column(
 						horizontalAlignment = Alignment.CenterHorizontally,
 						modifier = Modifier.padding(15.dp)) {
@@ -182,6 +197,7 @@ fun KnowAngel() {
 						    
 						    )
 						TripInfoCard(selected = isSelectedTrip, onClick = {
+							
 							isSelectedTrip = !isSelectedTrip
 						})
 						Spacer(modifier = Modifier.height(10.dp))
@@ -197,6 +213,12 @@ fun KnowAngel() {
 						TripInfoCard(selected = isSelectedUpComing, onClick = {
 							isSelectedUpComing = !isSelectedUpComing
 						})
+						Spacer(modifier = Modifier.height(20.dp))
+						CommonYellowButton(text = "CONTINUE", onClick = {
+							
+							navController.navigate("bookingSummary")
+						})
+						Spacer(modifier = Modifier.height(60.dp))
 					}
 				}
 			}
@@ -234,7 +256,9 @@ fun ProfileImageSection(modifier: Modifier = Modifier) {
 @Composable
 fun KnowAngelPreview() {
 	TravelAppTheme {
-		KnowAngel()
+		KnowAngel(
+			navController = rememberNavController(),
+				 )
 	}
 	
 }
