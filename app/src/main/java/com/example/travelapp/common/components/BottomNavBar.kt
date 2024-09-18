@@ -115,14 +115,7 @@ fun CustomBottomNavigation( selectedIndex: Int,  onItemSelected : (Int) -> Unit,
 		// Central Circular Button
 		FloatingActionButton(
 			onClick = {
-//				navHostController.navigate("addTrip") {
-//					popUpTo(navHostController.graph.findStartDestination().id) {
-//						saveState = true
-//					}
-//					launchSingleTop =
-//						true								// Restore state when reelecting a previously selected item
-//					restoreState = true
-//				}
+
 			},
 			shape = CircleShape,
 			containerColor = colorResource(id = R.color.app_yellow),

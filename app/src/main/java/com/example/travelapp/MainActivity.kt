@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.common.route.TravelAppNavHost
 import com.example.travelapp.ui.theme.TravelAppTheme
@@ -15,6 +16,8 @@ class MainActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
+		WindowCompat.setDecorFitsSystemWindows(window, false)
+		
 		setContent {
 			
 			TravelAppTheme {

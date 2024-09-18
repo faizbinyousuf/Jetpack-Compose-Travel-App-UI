@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,6 +40,7 @@ import com.example.travelapp.common.components.CommonYellowButton
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -46,7 +48,9 @@ fun HomeScreen(navController: NavHostController) {
 	
 	
 	
-	Scaffold(topBar = {
+	Scaffold(
+		contentWindowInsets = WindowInsets(0.dp),
+		topBar = {
 		CommonAppBar(showImage = true)
 	}
 	        
@@ -54,7 +58,7 @@ fun HomeScreen(navController: NavHostController) {
 		Column(
 			modifier = Modifier
 				.padding(it)
-				.padding(20.dp)
+				.padding(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 0.dp)
 				.fillMaxSize()
 				.verticalScroll(scrollState),
 			
@@ -68,7 +72,7 @@ fun HomeScreen(navController: NavHostController) {
 			CommonYellowButton(modifier = Modifier
 				.fillMaxWidth()
 				.padding(top = 15.dp, bottom = 30.dp),
-				text = "GET STARED",
+				text = "GET STARTED",
 				onClick = {
 					
 				
