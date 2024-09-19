@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.travelapp.features.find.FindAngels
+import com.example.travelapp.features.myluggage.screens.LuggageScreen
 import com.example.travelapp.features.send.components.SendScreen
 import com.example.travelapp.features.status.presentation.HomeScreen
 import com.example.travelapp.features.trip.presentation.TripScreen
@@ -69,7 +70,7 @@ fun MainScreen(navController: NavHostController) {
 			contentAlignment = Alignment.BottomCenter
 		   
 		   ) {
-			var scrolState = rememberScrollState()
+
 			when (selectedIndex) {
 				0 -> {
 				
@@ -81,7 +82,7 @@ fun MainScreen(navController: NavHostController) {
 				}
 				
 				2 -> {
-					FindAngels(navController = navController)
+					LuggageScreen(navController = navController)
 				}
 				
 				3 -> {

@@ -32,6 +32,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.vector.VectorProperty
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -56,6 +57,7 @@ fun TripCard() {
 	
 	Card(
 		shape = RoundedCornerShape(16.dp),
+		colors = CardDefaults.cardColors(containerColor = Color.White),
 		elevation = CardDefaults.cardElevation(8.dp),
 		modifier = Modifier
 			.padding(top = 5.dp, bottom = 8.dp)
@@ -131,6 +133,7 @@ fun TripCard() {
 					.height(1.dp)) {
 				
 				drawLine(
+
 					color = dottedGrey,
 					start = Offset(0f, 0f),
 					end = Offset(size.width, 0f),

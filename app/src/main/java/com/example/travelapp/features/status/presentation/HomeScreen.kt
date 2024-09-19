@@ -51,7 +51,7 @@ fun HomeScreen(navController: NavHostController) {
 	Scaffold(
 		contentWindowInsets = WindowInsets(0.dp),
 		topBar = {
-		CommonAppBar(showImage = true)
+		CommonAppBar(   navController = navController,showImage = true)
 	}
 	        
 	        ) {

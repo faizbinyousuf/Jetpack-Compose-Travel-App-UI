@@ -5,6 +5,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,9 +22,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -79,32 +83,34 @@ fun SendScreen(
 		Scaffold(
 			contentWindowInsets = WindowInsets(0.dp),
 			topBar = {
-			CommonAppBar(title = "Send")
+			CommonAppBar(   navController = navController,title = "Send")
 		}) {
 			Column(
 				modifier = Modifier
-					.fillMaxSize()
+					.fillMaxWidth()
 					.padding(it)
 					.padding(horizontal = 15.dp)
 					.verticalScroll(scrollState)
 				,
 				horizontalAlignment = Alignment.CenterHorizontally,
 				verticalArrangement = Arrangement.spacedBy(12.dp)
-			      ) {                //BoxImage()
+			      ) {
+
+
 				Text(
 					"What are you sending?",
-					
+
 					style = MaterialTheme.typography.titleLarge.copy(
 						fontWeight = FontWeight.W300
 					                                                ),
-					
+
 					)
 				BoxImage()
-				//	ItemDropDown()
+					ItemDropDown()
 				
 				ItemImageContainer()
 				
-				
+
 				ItemDescriptionTextField("Item Description")
 				ElevatedTextField(
 					"Approximate value in $", icon = R.drawable.dollar_svg
@@ -115,7 +121,7 @@ fun SendScreen(
 				Row(
 					modifier = Modifier
 						.fillMaxWidth(),
-						
+
 					horizontalArrangement = Arrangement.SpaceBetween
 				   ) {
 					ElevatedTextField(
@@ -129,27 +135,27 @@ fun SendScreen(
 							.weight(1f)
 							.padding(start = 5.dp)
 					                 )
-					
+
 					ItemDescriptionTextField("Make an offer to find Angels faster ")
 				}
-				
+
 				CommonYellowButton(
 					text = "DONE", onClick = {
 						navController.navigate("findAngels")
 					},
-					
+
 					modifier = Modifier.
 					padding(top = 15.dp, bottom = 30.dp).
 					fillMaxWidth()
-					
-					
-								  
+
+
+
 								  )
-				
-				
-				
-				
-				
+
+
+
+
+
 			}
 		}
 	}
@@ -238,34 +244,90 @@ fun ItemImageContainer() {
 	
 }
 
-
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ItemDropDown() {
-	DropdownMenu(
-		expanded = true, onDismissRequest = { }, modifier = Modifier
-			.padding(8.dp)
-			.border(
-				width = 1.dp,
-				color = MaterialTheme.colorScheme.onPrimary,
-				shape = RoundedCornerShape(8.dp)
-			       )
-	            ) {
-		DropdownMenuItem(text = { Text("item1") }, onClick = { }, leadingIcon = {
-			Icon(
-				painter = painterResource(id = R.drawable.back_arrow_svg), contentDescription = ""
-			    )
-		})
-		DropdownMenuItem(text = { Text("item2") }, onClick = {
-			
-			///Toast.makeText(context, "This is a test Toast ", Toast.LENGTH_SHORT).show()
-		}, leadingIcon = {
-			Icon(
-				painter = painterResource(id = R.drawable.back_arrow_svg), contentDescription = ""
-			    )
-		})
+	val options = listOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
+	var expanded by remember { mutableStateOf(false) }
+	var selectedOptionText by remember { mutableStateOf(options[0]) }
+
+	ExposedDropdownMenuBox(
+		expanded = expanded,
+		onExpandedChange = {
+			expanded = !expanded
+		}
+	) {
+
+
+		TextField(
+			readOnly = true,
+			value = selectedOptionText,
+			onValueChange = { },
+			modifier = Modifier
+				.menuAnchor()
+				.fillMaxWidth() //			.padding(10.dp)
+				.shadow(
+					elevation = 2.dp, // Set elevation here
+					shape = RoundedCornerShape(8.dp),
+					clip = true // Ensure the shadow is clipped to the shape
+				)
+				.background(
+					color = Color.White, shape = RoundedCornerShape(8.dp)
+				)
+				.border(width = 1.dp, color = Color(0xFFCDC9C9), shape = RoundedCornerShape(8.dp)),
+
+			shape = RoundedCornerShape(8.dp),
+			colors = TextFieldDefaults.colors(
+				focusedContainerColor = Color.Transparent,
+				unfocusedContainerColor = Color.Transparent,
+				disabledContainerColor = Color.Transparent,
+				focusedIndicatorColor = Color.Transparent, // Remove default underline
+				unfocusedIndicatorColor = Color.Transparent,
+			),
+
+						trailingIcon = {
+				ExposedDropdownMenuDefaults.TrailingIcon(
+					expanded = expanded
+				)
+			},
+
+		)
+//
+//		TextField(
+//			modifier = Modifier.menuAnchor()
+//,			readOnly = true,
+//			value = selectedOptionText,
+//			onValueChange = { },
+//			label = { Text("Label") },
+//			trailingIcon = {
+//				ExposedDropdownMenuDefaults.TrailingIcon(
+//					expanded = expanded
+//				)
+//			},
+//			colors = ExposedDropdownMenuDefaults.textFieldColors()
+//		)
+		ExposedDropdownMenu(
+			expanded = expanded,
+			onDismissRequest = {
+				expanded = false
+			}
+		) {
+			options.forEach { selectionOption ->
+				DropdownMenuItem(
+					text = {Text(text = selectionOption)},
+					onClick = {
+						selectedOptionText = selectionOption
+						expanded = false
+					}
+				)
+
+
+			}
+		}
 	}
 }
+
+
 
 @Composable
 private fun BoxImage() {

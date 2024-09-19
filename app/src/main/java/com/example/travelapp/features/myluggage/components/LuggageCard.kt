@@ -60,6 +60,7 @@ fun LuggageCard() {
 	
 	Card(
 		shape = RoundedCornerShape(16.dp),
+		colors = CardDefaults.cardColors(containerColor = Color.White),
 		elevation = CardDefaults.cardElevation(8.dp),
 		modifier = Modifier
 			.padding(top = 5.dp, bottom = 8.dp)
@@ -124,7 +125,7 @@ fun LuggageCard() {
 				Image(
 					painter = deliveredIcon,
 					contentDescription = "Delivered",
-					modifier = Modifier.size(50.dp)
+					modifier = Modifier.size(40.dp)
 						
 					 )
 			}
@@ -150,17 +151,46 @@ fun LuggageCard() {
 					end = Offset(size.width, 0f),
 					pathEffect = pathEffect)
 			}
+
+			Row(
+				modifier = Modifier
+					.padding(top = 10.dp)
+
+					.fillMaxWidth(),
+				horizontalArrangement = Arrangement.SpaceBetween
+			) {
+				Text( " Angel Details", style = MaterialTheme.typography.bodyMedium.copy(
+					fontWeight = FontWeight.W500, fontSize = 12.sp, color = colorResource(id = R.color.app_gray),
+				))
+				Text(
+					"Cancel",
+
+					style = MaterialTheme.typography.bodyMedium.copy(
+						fontWeight = FontWeight.W500, fontSize = 10.sp, color = Color.Black,
+
+
+						),
+
+					modifier = Modifier
+						.align(Alignment.Top)
+						.background(
+							color = colorResource(id = R.color.app_yellow),
+							shape = RoundedCornerShape(25.dp))
+						.padding(horizontal = 12.dp, vertical = 6.dp)
+
+				)
+			}
 			
 			Spacer(modifier = Modifier.height(8.dp))
 			
 			// User Row with Image and Details
 			Row(verticalAlignment = Alignment.CenterVertically) {
 				Image(
-					painter = painterResource(id = R.drawable.home_header),
+					painter = painterResource(id = R.drawable.onboard_image),
 					contentDescription = "User Image",
 					contentScale = ContentScale.Crop,
 					modifier = Modifier
-						.size(30.dp)
+						.size(25.dp)
 						.clip(CircleShape)
 						.border(
 							width = 1.dp, color = Color.Black, shape = CircleShape))
@@ -178,23 +208,33 @@ fun LuggageCard() {
 						)
 					
 					Spacer(modifier = Modifier.weight(1f))
-					Text(
-						"Delivered",
-						
-						style = MaterialTheme.typography.bodyMedium.copy(
-							fontWeight = FontWeight.W500, fontSize = 10.sp, color = Color.Black,
-							
-							
-							),
-						
+					// Action Icons Row
+					Row(
+						horizontalArrangement = Arrangement.spacedBy(40.dp),
 						modifier = Modifier
-							.align(Alignment.Top)
-							.background(
-								color = colorResource(id = R.color.app_yellow),
-								shape = RoundedCornerShape(25.dp))
-							.padding(horizontal = 8.dp, vertical = 6.dp)
-					    
-					    )
+
+							.padding(top = 8.dp, start = 40.dp)
+							.fillMaxWidth()
+							.weight(1f)
+					)
+
+					{
+						Image(
+							painter = painterResource(id = R.drawable.phone_call_svg),
+							contentDescription = "Chat",
+							modifier = Modifier.size(25.dp)
+
+						)
+
+						Image(
+							painter = painterResource(id = R.drawable.chat_png),
+							contentDescription = "Chat",
+							modifier = Modifier.size(25.dp)
+
+						)
+					}
+
+
 					
 				}
 				
@@ -205,40 +245,21 @@ fun LuggageCard() {
 			
 			Spacer(modifier = Modifier.height(8.dp))
 			
-			// Action Icons Row
-			Row(
-				horizontalArrangement = Arrangement.spacedBy(40.dp),
-				modifier = Modifier
-					.padding(top = 8.dp, start = 40.dp)
-					.fillMaxWidth()) {
-				Image(
-					painter = painterResource(id = R.drawable.phone_call_svg),
-					contentDescription = "Chat",
-					modifier = Modifier.size(25.dp)
-				     
-				     )
-				
-				Image(
-					painter = painterResource(id = R.drawable.chat_png),
-					contentDescription = "Chat",
-					modifier = Modifier.size(25.dp)
-				     
-				     )
-			}
-			
-			//			Spacer(modifier = Modifier.height(8.dp))
+
+
+
 			
 			
 			
-			CustomStepper(
-				
-				modifier = Modifier.padding(0.dp),
-				
-				
-				selectedColor = colorResource(id = R.color.app_yellow),
-				numberOfSteps = numberStep,
-				currentStep = currentStep,
-				stepDescriptionList = titleList)
+//			CustomStepper(
+//
+//				modifier = Modifier.padding(0.dp),
+//
+//
+//				selectedColor = colorResource(id = R.color.app_yellow),
+//				numberOfSteps = numberStep,
+//				currentStep = currentStep,
+//				stepDescriptionList = titleList)
 			
 			
 		}

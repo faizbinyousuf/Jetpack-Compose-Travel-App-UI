@@ -74,7 +74,7 @@ fun KnowAngel(
 					painter = painter, contentDescription = null, contentScale = ContentScale.Crop,
 					
 					modifier = Modifier.fillMaxWidth())
-				CommonAppBar(title = "Know your ")
+				CommonAppBar(  navController = navController,title = "Know your ")
 				ProfileImageSection(
 					modifier = Modifier
 						
@@ -184,7 +184,7 @@ fun KnowAngel(
 					modifier = Modifier
 						
 						.fillMaxWidth()
-						.offset(y = -30.dp)
+						//.offset(y = 0.dp)
 					   ) {
 					Column(
 						horizontalAlignment = Alignment.CenterHorizontally,

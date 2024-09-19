@@ -10,13 +10,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -40,7 +43,7 @@ fun TripScreen(
 	}
 	var scrollState = rememberScrollState()
 	Scaffold(contentWindowInsets = WindowInsets(0.dp), containerColor = Color.White, topBar = {
-		CommonAppBar(
+		CommonAppBar(   navController = navController,
 			title = "Trips")
 	}) {
 		Column(
@@ -54,27 +57,43 @@ fun TripScreen(
 			
 			TopImageSection()
 			AddTripLuggageButton(label = "Add New Trip")
-			
-			Spacer(modifier = Modifier.height(15.dp)) //			Text(
-			//
-			//				"You don’t have any upcomming trips Please add it",
-			//				style =  MaterialTheme.typography.headlineMedium,
-			//				textAlign = TextAlign.Center,
-			//				modifier = Modifier.padding(top = 15.dp)
-			//				)
-			
+
+
+
+			Spacer(modifier = Modifier.height(15.dp))
+
+//						Text(
+//
+//							"You don’t have any upcomming trips Please add it",
+//							style =  MaterialTheme.typography.headlineMedium,
+//							textAlign = TextAlign.Center,
+//							modifier = Modifier.padding(top = 15.dp)
+//							)
+//
 			
 			(1..3).forEach {
 				TripCard()
 			}
-			
-			
+			Spacer(modifier = Modifier.height(30.dp))
+
+
 		}
 	}
 }
 
 @Composable
 fun TopImageSection() {
+
+
+
+
+
+
+
+
+
+
+
 	var painter = painterResource(id = R.drawable.trip_top_image)
 	Image(
 		painter = painter, contentDescription = null, contentScale = ContentScale.Fit,

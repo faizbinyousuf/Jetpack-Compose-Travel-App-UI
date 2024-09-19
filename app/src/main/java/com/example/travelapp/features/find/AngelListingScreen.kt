@@ -58,146 +58,167 @@ import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
 fun AngelListingScreen(navController: NavHostController) {
-	
-	Surface(
-		color = Color.White) {
-		Scaffold(
-			contentWindowInsets = WindowInsets(0.dp),
-			topBar = {
-			CommonAppBar(
-				title = "My Angels")
-		}) {
-			Column(
-				modifier = Modifier
-					.padding(it)
-					.fillMaxSize(), horizontalAlignment = Alignment.Start
-			      
-			      ) {
-				FilterSection()
-				CustomLineWithCircles()
-				StartAndDestination()
-			    LazyColumn(
-					modifier = Modifier.padding(bottom = 30.dp)
-						  ) {
-					items(5) {
-						FindAngelCard(
-							onClick = {
-								navController.navigate("knowAngel")
-							}
-									 )
-					}
-			    }
-				
-			}
-		}
-	}
-	
+
+    Surface(
+        color = Color.White
+    ) {
+        Scaffold(
+            contentWindowInsets = WindowInsets(0.dp),
+            topBar = {
+                CommonAppBar(
+                    navController = navController,
+
+                    title = "My Angels"
+                )
+            }) {
+            Column(
+                modifier = Modifier
+                    .padding(it)
+                    .fillMaxSize(), horizontalAlignment = Alignment.Start
+
+            ) {
+                FilterSection()
+                CustomLineWithCircles()
+                StartAndDestination()
+                LazyColumn(
+                    modifier = Modifier.padding(bottom = 30.dp)
+                ) {
+                    items(5) {
+                        FindAngelCard(
+                            onClick = {
+                                navController.navigate("knowAngel")
+                            }
+                        )
+                    }
+                }
+
+            }
+        }
+    }
+
 }
 
 @Composable
 private fun StartAndDestination() {
-	Row(
-		modifier = Modifier
-			.padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 20.dp)
-			.fillMaxWidth(),
-		verticalAlignment = Alignment.CenterVertically,
-		horizontalArrangement = Arrangement.SpaceBetween) {
-		Column {
-			Text("ABC", style = MaterialTheme.typography.titleLarge)
-			Text(
-				"Saturday", style = MaterialTheme.typography.bodySmall.copy(
-					color = colorResource(id = R.color.app_gray)))
-			Text(
-				"30 May 2024", style = MaterialTheme.typography.bodySmall.copy(
-					color = colorResource(id = R.color.app_gray)))
-		}
-		Column {
-			Text("XYZ", style = MaterialTheme.typography.titleLarge)
-			Text(
-				"Saturday", style = MaterialTheme.typography.bodySmall.copy(
-					color = colorResource(id = R.color.app_gray)))
-			Text(
-				"30 May 2024", style = MaterialTheme.typography.bodySmall.copy(
-					color = colorResource(id = R.color.app_gray)))
-		}
-	}
+    Row(
+        modifier = Modifier
+            .padding(start = 15.dp, end = 15.dp, top = 20.dp, bottom = 20.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column {
+            Text("ABC", style = MaterialTheme.typography.titleLarge)
+            Text(
+                "Saturday", style = MaterialTheme.typography.bodySmall.copy(
+                    color = colorResource(id = R.color.app_gray)
+                )
+            )
+            Text(
+                "30 May 2024", style = MaterialTheme.typography.bodySmall.copy(
+                    color = colorResource(id = R.color.app_gray)
+                )
+            )
+        }
+        Column {
+            Text("XYZ", style = MaterialTheme.typography.titleLarge)
+            Text(
+                "Saturday", style = MaterialTheme.typography.bodySmall.copy(
+                    color = colorResource(id = R.color.app_gray)
+                )
+            )
+            Text(
+                "30 May 2024", style = MaterialTheme.typography.bodySmall.copy(
+                    color = colorResource(id = R.color.app_gray)
+                )
+            )
+        }
+    }
 }
 
 
 @Composable
 fun CustomLineWithCircles() {    // Define your line thickness and circle size
-	val lineThickness = 5.dp
-	val circleSize = 16.dp
-	
-	Box(modifier = Modifier.fillMaxWidth()) {
-		Canvas(
-			modifier = Modifier
-				.padding(top = 10.dp)
-				.fillMaxWidth()
-				.height(lineThickness)
-				.padding(horizontal = 16.dp)) {            // Draw the line
-			val startX = circleSize.toPx() / 2 // Adjusted to account for the circle's radius
-			val endX = size.width - (circleSize.toPx() / 2)
-			val centerY = size.height / 2
-			
-			// Line between circles
-			drawLine(
-				color = Color(0XFFFCD80E),
-				start = Offset(startX, centerY),
-				end = Offset(endX, centerY),
-				strokeWidth = lineThickness.toPx(),
-				cap = StrokeCap.Round)
-			
-			// Draw left circle
-			drawCircle(
-				color = Color(0XFFFCD80E),
-				radius = circleSize.toPx() / 2,
-				center = Offset(startX, centerY))
-			
-			// Draw right circle
-			drawCircle(
-				color = Color(0XFFFCD80E),
-				radius = circleSize.toPx() / 2,
-				center = Offset(endX, centerY))
-		}
-	}
+    val lineThickness = 5.dp
+    val circleSize = 16.dp
+
+    Box(modifier = Modifier.fillMaxWidth()) {
+        Canvas(
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .fillMaxWidth()
+                .height(lineThickness)
+                .padding(horizontal = 16.dp)
+        ) {            // Draw the line
+            val startX = circleSize.toPx() / 2 // Adjusted to account for the circle's radius
+            val endX = size.width - (circleSize.toPx() / 2)
+            val centerY = size.height / 2
+
+            // Line between circles
+            drawLine(
+                color = Color(0XFFFCD80E),
+                start = Offset(startX, centerY),
+                end = Offset(endX, centerY),
+                strokeWidth = lineThickness.toPx(),
+                cap = StrokeCap.Round
+            )
+
+            // Draw left circle
+            drawCircle(
+                color = Color(0XFFFCD80E),
+                radius = circleSize.toPx() / 2,
+                center = Offset(startX, centerY)
+            )
+
+            // Draw right circle
+            drawCircle(
+                color = Color(0XFFFCD80E),
+                radius = circleSize.toPx() / 2,
+                center = Offset(endX, centerY)
+            )
+        }
+    }
 }
 
 @Composable
 private fun FilterSection() {
-	Row(
-		modifier = Modifier
-			.padding(end = 15.dp)
-			.fillMaxWidth(),
-		verticalAlignment = Alignment.CenterVertically,
-		horizontalArrangement = Arrangement.SpaceBetween) {
-		Text(
-			text = "23  Available", style = MaterialTheme.typography.titleMedium,
-			
-			modifier = Modifier.padding(20.dp))
-		
-		OutlinedButton(colors = ButtonDefaults.buttonColors(
-			contentColor = Color.Black, containerColor = Color.White),
-			modifier = Modifier
-				.height(33.dp)
-				.padding(vertical = 1.dp, horizontal = 3.dp),
-			
-			shape = RoundedCornerShape(6.dp),
-			onClick = { /*TODO*/ }) {
-			Text(
-				"Filter", style = MaterialTheme.typography.labelSmall)
-		}
-	}
+    Row(
+        modifier = Modifier
+            .padding(end = 15.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = "23  Available", style = MaterialTheme.typography.titleMedium,
+
+            modifier = Modifier.padding(20.dp)
+        )
+
+        OutlinedButton(colors = ButtonDefaults.buttonColors(
+            contentColor = Color.Black, containerColor = Color.White
+        ),
+            modifier = Modifier
+                .height(33.dp)
+                .padding(vertical = 1.dp, horizontal = 3.dp),
+
+            shape = RoundedCornerShape(6.dp),
+            onClick = { /*TODO*/ }) {
+            Text(
+                "Filter", style = MaterialTheme.typography.labelSmall
+            )
+        }
+    }
 }
 
 
 @Preview
 @Composable
 fun AngelListingScreenPreview() {
-	
-	TravelAppTheme {
-		AngelListingScreen(navController = rememberNavController())
-	}
-	
+
+    TravelAppTheme {
+        AngelListingScreen(navController = rememberNavController())
+    }
+
 }
 

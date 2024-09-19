@@ -1,6 +1,8 @@
 package com.example.travelapp.common.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -15,12 +17,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.travelapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommonAppBar(showImage: Boolean = false, title: String = "") {
+fun CommonAppBar(  navController: NavHostController, showImage: Boolean = false, title: String = "") {
 	CenterAlignedTopAppBar(
+
 		
 		colors = TopAppBarDefaults.topAppBarColors(
 			containerColor = Color.Transparent),
@@ -50,7 +54,16 @@ fun CommonAppBar(showImage: Boolean = false, title: String = "") {
 		}, navigationIcon = {
 			if (!showImage) {
 				var svgIcon = painterResource(id = R.drawable.back_arrow_svg)
-				Image(painter = svgIcon, contentDescription = null)
+				Box(
+
+					modifier = Modifier.clickable{
+						 navController.popBackStack()
+					}
+						.padding(10.dp)
+
+				) {
+					Image(painter = svgIcon, contentDescription = null)
+				}
 				
 			}
 			

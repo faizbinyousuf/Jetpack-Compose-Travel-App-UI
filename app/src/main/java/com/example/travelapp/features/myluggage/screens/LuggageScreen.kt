@@ -26,70 +26,77 @@ import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.AddTripLuggageButton
 import com.example.travelapp.common.components.CommonAppBar
+import com.example.travelapp.features.myluggage.components.LuggageCard
 import com.example.travelapp.features.trip.components.TripCard
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 @Composable
 fun LuggageScreen(
-	navController: NavHostController
-              ) {
-	
-	BackHandler {
-		navController.navigate("mainScreen") {
-			popUpTo(0) { inclusive = true }
-			launchSingleTop = true
-		}
-	}
-	var scrollState = rememberScrollState()
-	Scaffold(contentWindowInsets = WindowInsets(0.dp), containerColor = Color.White, topBar = {
-		CommonAppBar(
-			title = "Luggage")
-	}) { innerPadding ->
-		Column(
-			horizontalAlignment = Alignment.CenterHorizontally,
-			modifier = Modifier
+    navController: NavHostController
+) {
+
+    BackHandler {
+        navController.navigate("mainScreen") {
+            popUpTo(0) { inclusive = true }
+            launchSingleTop = true
+        }
+    }
+    var scrollState = rememberScrollState()
+    Scaffold(contentWindowInsets = WindowInsets(0.dp), containerColor = Color.White, topBar = {
+        CommonAppBar(   navController = navController,
+            title = "Luggage"
+        )
+    }) { innerPadding ->
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
 				.padding(innerPadding)
 				.verticalScroll(scrollState)
 				.fillMaxWidth()
 				.padding(
-					horizontal = 15.dp)) {
-			
-			TopImageSection()
-			AddTripLuggageButton(label = "Add New Luggage")
-			
-			Spacer(modifier = Modifier.height(15.dp)) //			Text(
-			
-			
-			(1..3).forEach {
-				Text(it.toString())
-			}
-			
-			
-		}
-	}
+					horizontal = 15.dp
+				)
+        ) {
+
+            TopImageSection()
+            AddTripLuggageButton(label = "Add New Luggage")
+
+            Spacer(modifier = Modifier.height(15.dp)) //			Text(
+
+
+            (1..3).forEach {
+               LuggageCard()
+            }
+
+            Spacer(modifier = Modifier.height(30.dp))
+
+
+        }
+    }
 }
 
 @Composable
 fun TopImageSection() {
-	var painter = painterResource(id = R.drawable.luggage_top_image)
-	Image(
-		painter = painter, contentDescription = null, contentScale = ContentScale.Fit,
-		
-		modifier = Modifier
-			
+    var painter = painterResource(id = R.drawable.luggage_top_image)
+    Image(
+        painter = painter, contentDescription = null, contentScale = ContentScale.Fit,
+
+        modifier = Modifier
+
 			.fillMaxWidth()
-			
-			.height(120.dp))
+
+			.height(120.dp)
+    )
 }
 
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun TripScreenPreview() {
-	TravelAppTheme {
-		
-		LuggageScreen(navController = rememberNavController())
-		
-	}
-	
+    TravelAppTheme {
+
+        LuggageScreen(navController = rememberNavController())
+
+    }
+
 }

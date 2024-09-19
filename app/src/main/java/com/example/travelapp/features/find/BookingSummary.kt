@@ -56,7 +56,7 @@ fun BookingSummary(
 						painter = painter, contentDescription = null, contentScale = ContentScale.Crop,
 						
 						modifier = Modifier.fillMaxWidth())
-					CommonAppBar(title = "Booking Summary")
+					CommonAppBar(   navController = navController,title = "Booking Summary")
 					Box(
 						modifier = Modifier
 							.padding(horizontal = 20.dp)

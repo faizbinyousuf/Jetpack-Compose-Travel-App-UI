@@ -50,7 +50,7 @@ fun FindAngels(navController: NavHostController) {
 		Scaffold(
 			contentWindowInsets = WindowInsets(0.dp),
 			topBar = {
-				CommonAppBar(title = "Find Angels")
+				CommonAppBar(   navController = navController,title = "Find Angels")
 			}) {
 			Column(
 				modifier = Modifier
