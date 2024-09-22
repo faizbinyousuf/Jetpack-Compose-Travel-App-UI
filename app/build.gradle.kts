@@ -56,7 +56,19 @@ dependencies {
 	
 	implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.0")
 	implementation("androidx.compose.ui:ui-text-google-fonts:1.7.0")
-	
+	implementation ("androidx.activity:activity-compose:1.7.2")
+	implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+	implementation ("com.google.accompanist:accompanist-permissions:0.33.0-alpha")
+
+
+// import coil librabry
+
+	implementation("io.coil-kt:coil-compose:2.7.0")
+
+
+
+
+
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
 	implementation(libs.androidx.activity.compose)

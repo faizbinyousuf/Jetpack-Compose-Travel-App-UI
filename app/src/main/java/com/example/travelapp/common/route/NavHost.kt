@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.travelapp.ImagePickerScreen
 import com.example.travelapp.ProfileScreen
 import com.example.travelapp.common.components.MainScreen
 import com.example.travelapp.features.auth.presentation.AuthWrapper
@@ -72,6 +73,8 @@ fun TravelAppNavHost(navController: NavHostController) {
 		
 		/// Trip related
 		composable("trips") { TripScreen(navController = navController) }
+
+		composable("cameraScreen") { ImagePickerScreen() }
 		
 		
 		
