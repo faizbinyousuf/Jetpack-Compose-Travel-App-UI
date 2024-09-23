@@ -1,6 +1,7 @@
 plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.jetbrains.kotlin.android)
+	id("com.google.gms.google-services")
 }
 
 
@@ -52,7 +53,22 @@ android {
 }
 
 dependencies {
+
+
+	// firebase sdk
+	implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+
+	// firebase analytics
+
+	implementation("com.google.firebase:firebase-analytics")
+
+	//firebase messaging dependcency
+	implementation("com.google.firebase:firebase-messaging")
+
+	// Data store dependency (|advcanced version of SharedPreferences)
+	implementation("androidx.datastore:datastore-preferences:1.0.0")
 	
+
 	
 	implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.0")
 	implementation("androidx.compose.ui:ui-text-google-fonts:1.7.0")
@@ -61,7 +77,7 @@ dependencies {
 	implementation ("com.google.accompanist:accompanist-permissions:0.33.0-alpha")
 
 
-// import coil librabry
+// import coil library
 
 	implementation("io.coil-kt:coil-compose:2.7.0")
 
@@ -80,6 +96,9 @@ dependencies {
 	implementation(libs.androidx.navigation.compose)
 	implementation(libs.androidx.material3)
 	implementation(libs.androidx.constraintlayout)
+	implementation(libs.androidx.media3.exoplayer)
+	implementation("androidx.media3:media3-ui:1.2.0")
+	//implementation(libs.androidx.media3.ui)
 	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
@@ -87,4 +106,7 @@ dependencies {
 	androidTestImplementation(libs.androidx.ui.test.junit4)
 	debugImplementation(libs.androidx.ui.tooling)
 	debugImplementation(libs.androidx.ui.test.manifest)
+
+
+
 }

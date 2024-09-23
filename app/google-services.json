@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "536837429333",
+    "project_id": "travel-app-kotlin",
+    "storage_bucket": "travel-app-kotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536837429333:android:5d31604fa3ff96172c5cdc",
+        "android_client_info": {
+          "package_name": "com.example.travelapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKK1EPUan40QotYy9lBUuW0BT-ywuersA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

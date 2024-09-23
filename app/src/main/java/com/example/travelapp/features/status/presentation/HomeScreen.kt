@@ -2,6 +2,7 @@ package com.example.travelapp.features.status.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -37,6 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
 import com.example.travelapp.common.components.CommonAppBar
 import com.example.travelapp.common.components.CommonYellowButton
+import com.example.travelapp.features.status.components.ExoPlayerComposable
 import com.example.travelapp.ui.theme.TravelAppTheme
 
 
@@ -92,13 +96,24 @@ fun HowItWorksSection() {
 		modifier = Modifier
 			.padding(top = 15.dp)
 			.fillMaxWidth()
+			.height(200.dp)
+			.background(
+				color = Color.Gray, shape = RoundedCornerShape(25.dp)
+			)
+			.clip( RoundedCornerShape(25.dp))
 	      
 	      ) {
-		Image(
-			painter = image,
-			contentDescription = "How it works",
-			contentScale = ContentScale.Crop,
-			modifier = Modifier.fillMaxWidth())
+		//Text("dsd")
+
+		ExoPlayerComposable()
+
+
+
+//		Image(
+//			painter = image,
+//			contentDescription = "How it works",
+//			contentScale = ContentScale.Crop,
+//			modifier = Modifier.fillMaxWidth())
 	}
 	
 	

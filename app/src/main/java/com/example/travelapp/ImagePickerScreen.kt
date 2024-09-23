@@ -113,6 +113,8 @@ fun ImagePickerScreen() {
         cameraPermissionState.status,
         storagePermissionState.allPermissionsGranted
     ) {
+
+
         if (!(cameraPermissionState.status== PermissionStatus.Granted)) {
           // show snackbar
             cameraPermissionState.launchPermissionRequest()
