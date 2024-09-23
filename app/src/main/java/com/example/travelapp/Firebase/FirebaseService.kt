@@ -135,7 +135,7 @@ class FirebaseService : FirebaseMessagingService() {
             this, 0, intent, FLAG_IMMUTABLE
         )
 
-        // comment test
+        // comment test wedwe
 
         val channelId = this.getString(R.string.default_notification_channel_id)
 
