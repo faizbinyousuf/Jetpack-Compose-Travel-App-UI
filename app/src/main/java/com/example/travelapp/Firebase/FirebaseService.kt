@@ -135,6 +135,8 @@ class FirebaseService : FirebaseMessagingService() {
             this, 0, intent, FLAG_IMMUTABLE
         )
 
+        // comment test
+
         val channelId = this.getString(R.string.default_notification_channel_id)
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
