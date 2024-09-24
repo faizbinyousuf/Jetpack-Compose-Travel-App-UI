@@ -67,7 +67,13 @@ fun TravelAppNavHost(navController: NavHostController) {
 		
 		
 		
-		composable("mainScreen") { MainScreen(navController = navController) }
+		composable("mainScreen/{index}") {
+
+			val newIndex = it.arguments?.getString("index")?.toInt()?: 0
+			MainScreen(navController = navController, index = newIndex )
+
+
+		}
 		composable("Settings") { ProfileScreen() }
 		
 		

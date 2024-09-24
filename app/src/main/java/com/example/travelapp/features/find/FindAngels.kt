@@ -37,7 +37,7 @@ import com.example.travelapp.ui.theme.raleWay
 @Composable
 fun FindAngels(navController: NavHostController) {
 	BackHandler {
-		navController.navigate("mainScreen"){
+		navController.navigate("mainScreen/0"){
 			popUpTo(0) { inclusive = true }
 			launchSingleTop = true
 		}

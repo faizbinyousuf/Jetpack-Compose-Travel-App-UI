@@ -36,7 +36,7 @@ fun TripScreen(
               ) {
 	
 	BackHandler {
-		navController.navigate("mainScreen") {
+		navController.navigate("mainScreen/0") {
 			popUpTo(0) { inclusive = true }
 			launchSingleTop = true
 		}

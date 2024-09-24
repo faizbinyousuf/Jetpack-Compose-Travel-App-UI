@@ -96,7 +96,7 @@ fun OtpScreen(navController: NavHostController) {
 				Spacer(modifier = Modifier.height(100.dp))
 				CommonYellowButton(
 					text = "VERIFY", onClick = {
-						navController.navigate("mainScreen"){
+						navController.navigate("mainScreen/0"){
 							popUpTo(0) { inclusive = true }
 							launchSingleTop = true
 						}

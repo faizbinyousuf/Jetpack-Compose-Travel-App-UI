@@ -56,6 +56,8 @@ lateinit var  globalController: NavHostController
 //			val dataBundle = intent.extras
 //				Log.v("FCM  onCreate", dataBundle.toString())
 //		}
+
+
 		// Check if the activity was started from a notification tap
 		handleIntent(intent)
 
@@ -128,14 +130,28 @@ lateinit var  globalController: NavHostController
 //
 //
 
+	//  this handles the notification data when app is in background
 	override fun onNewIntent(intent: Intent) {
 		super.onNewIntent(intent)
-		var extras = intent.extras?.get("extra_data")
+
+		val extras = intent.extras?.get("extra_data")
 
 		Log.v("FCM  onNewIntent",extras.toString())
-		globalController.navigate("trips")
+		val destinationRoute = intent.getStringExtra("route") ?: "status"
+		val screenArray = arrayOf("status", "send", "luggage", "trips")
+		val destinationIndex = screenArray.indexOf(destinationRoute)
+
+
+		globalController.navigate("mainScreen/$destinationIndex")
+
+		// Pass the dynamic route as an argument to MainScreen or as part of nav arguments
+
+
+
+
+
 		// Handle intent when app is already running
-		handleIntent(intent)
+		//handleIntent(intent)
 	}
 
 	private fun showNotificationDialog(title: String?, body: String?) {
@@ -144,7 +160,7 @@ lateinit var  globalController: NavHostController
 		showDialog = true
 	}
 
-	// This will handle navigation based on the notification data
+	// This will handle navigation based on the notification data when app is in foreground
 	private fun handleIntent(intent: Intent?) {
 		intent?.extras?.let {
 			val data = it.getSerializable ("notification_data") as? HashMap<String, String>

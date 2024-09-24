@@ -72,8 +72,7 @@ class FirebaseService : FirebaseMessagingService() {
         message.notification?.let {
             // show notification even app is in foreground
 
-            sendNotification(message)
-            return
+
 
             if (isAppInForeground()) {
                 val notification = message.notification!!
@@ -164,7 +163,7 @@ class FirebaseService : FirebaseMessagingService() {
 //            )  )
 
         }
-        intent.setAction(UUID.randomUUID().toString()) // this is required to make the app not open the main activity when the notification is tapped. it opens the last active page/screen
+        intent.setAction(UUID.randomUUID().toString()) // this is required to make the app NOT open the main activity when the notification is tapped. it opens the last active page/screen
 
 
         val pendingIntent = PendingIntent.getActivity(

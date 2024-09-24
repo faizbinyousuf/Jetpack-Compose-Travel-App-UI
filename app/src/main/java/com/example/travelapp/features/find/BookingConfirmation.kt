@@ -71,7 +71,7 @@ fun BookingConfirmation(
 			
 			CommonYellowButton(text = "DONE", onClick = {
 				
-				navController.navigate("mainScreen") {
+				navController.navigate("mainScreen/0") {
 					popUpTo(0) { inclusive = true } // This will clear the entire back stack
 					launchSingleTop = true
 					
