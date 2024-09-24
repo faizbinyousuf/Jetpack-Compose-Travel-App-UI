@@ -23,13 +23,19 @@ import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.HashMap
+import java.util.UUID
 
 class FirebaseService : FirebaseMessagingService() {
+
+
 
     // initialise handlers
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
+
+
 
         // Create the notification channel (if necessary) when a message is received
 //        val channelId = "your_channel_id"
@@ -66,6 +72,9 @@ class FirebaseService : FirebaseMessagingService() {
         message.notification?.let {
             // show notification even app is in foreground
 
+            sendNotification(message)
+            return
+
             if (isAppInForeground()) {
                 val notification = message.notification!!
                 // Send an event to the UI to show a dialog
@@ -74,8 +83,10 @@ class FirebaseService : FirebaseMessagingService() {
                 intent.putExtra("body", notification.body)
                 LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
             } else {
+                Log.i("FCM Message Received", "App is in background")
+
                 // Show the notification if the app is in the background
-                sendNotification(message.notification!!)
+                sendNotification(message)
             }
 
 
@@ -126,13 +137,38 @@ class FirebaseService : FirebaseMessagingService() {
         return false
     }
 
-    private fun sendNotification(message: RemoteMessage.Notification) {
+    private fun sendNotification(message: RemoteMessage) {
+//        val intent = Intent(this, MainActivity::class.java).apply {
+//            addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+//        }
+//
+//        val pendingIntent = PendingIntent.getActivity(
+//            this, 0, intent, FLAG_IMMUTABLE
+//        )
+
+
+
         val intent = Intent(this, MainActivity::class.java).apply {
-            addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+          addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+            putExtra("notification_data", HashMap(
+                mapOf(
+                    "title" to message.data["extra_data"],
+                )
+            )  )
+//            putExtra("notification_data", HashMap(
+//                mapOf(
+//                    "title" to message.data["user_name"],
+//                )
+//            )  )
+
         }
+        intent.setAction(UUID.randomUUID().toString()) // this is required to make the app not open the main activity when the notification is tapped. it opens the last active page/screen
+
 
         val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, FLAG_IMMUTABLE
+            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         // comment test wedwe
@@ -140,8 +176,8 @@ class FirebaseService : FirebaseMessagingService() {
         val channelId = this.getString(R.string.default_notification_channel_id)
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setContentTitle(message.title)
-            .setContentText(message.body)
+            .setContentTitle(message.notification!!. title)
+            .setContentText(message.notification!!.body)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
