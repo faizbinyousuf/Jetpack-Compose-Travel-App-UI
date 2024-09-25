@@ -12,10 +12,13 @@ import androidx.navigation.compose.composable
 import com.example.travelapp.ImagePickerScreen
 import com.example.travelapp.ProfileScreen
 import com.example.travelapp.common.components.MainScreen
+import com.example.travelapp.features.Download.DownloadFileExample
+import com.example.travelapp.features.WebView.WebViewPage
 import com.example.travelapp.features.auth.presentation.AuthWrapper
 import com.example.travelapp.features.auth.presentation.LoginScreen
 import com.example.travelapp.features.auth.presentation.OtpScreen
 import com.example.travelapp.features.auth.presentation.RegistrationScreen
+import com.example.travelapp.features.charts.ChartScreen
 import com.example.travelapp.features.find.AngelListingScreen
 import com.example.travelapp.features.find.BookingConfirmation
 import com.example.travelapp.features.find.BookingSummary
@@ -81,9 +84,34 @@ fun TravelAppNavHost(navController: NavHostController) {
 		composable("trips") { TripScreen(navController = navController) }
 
 		composable("cameraScreen") { ImagePickerScreen() }
-		
-		
-		
+
+
+		composable("charts") {
+
+			ChartScreen(navController = navController)
+		}
+
+   // mainScreen/{index}
+		composable("webview/{url}") {
+
+
+			var urlFromNavParam = it.arguments?.getString("url") ?: "https://www.google.com"
+			WebViewPage(
+				url = urlFromNavParam
+
+			)
+		}
+
+
+		composable("download") {
+
+			DownloadFileExample(
+				navController = navController
+			)
+		}
+
+
+
 		/// routes for sending item
 		
 		

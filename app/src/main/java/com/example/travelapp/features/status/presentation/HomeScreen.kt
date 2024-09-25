@@ -3,11 +3,14 @@ package com.example.travelapp.features.status.presentation
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,13 +19,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,56 +48,146 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.travelapp.R
+import com.example.travelapp.common.ListTile
 import com.example.travelapp.common.components.CommonAppBar
 import com.example.travelapp.common.components.CommonYellowButton
 import com.example.travelapp.features.status.components.ExoPlayerComposable
 import com.example.travelapp.ui.theme.TravelAppTheme
+import kotlinx.coroutines.launch
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
 	val scrollState = rememberScrollState()
-	
-	
-	
-	Scaffold(
-		contentWindowInsets = WindowInsets(0.dp),
-		topBar = {
-		CommonAppBar(   navController = navController,showImage = true)
-	}
-	        
-	        ) {
-		Column(
-			modifier = Modifier
-				.padding(it)
-				.padding(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 0.dp)
-				.fillMaxSize()
-				.verticalScroll(scrollState),
-			
-			horizontalAlignment = Alignment.Start) {
-			TopImageSection()
-			Text("Welcome".uppercase(), style = MaterialTheme.typography.titleMedium)
-			Text(
-				"Let\'s get started", style = MaterialTheme.typography.titleLarge)
-			ActionItems()
-			HowItWorksSection()
-			CommonYellowButton(modifier = Modifier
-				.fillMaxWidth()
-				.padding(top = 15.dp, bottom = 30.dp),
-				text = "GET STARTED",
-				onClick = {
-					
-				
-				})
-			
-			
+
+	val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+	val scope = rememberCoroutineScope()
+
+
+
+	ModalNavigationDrawer(
+
+
+
+		drawerState = drawerState,
+		drawerContent = {
+
+			Box(
+				modifier = Modifier
+					.fillMaxHeight()
+					.width(300.dp)
+					.background(Color.White)
+			) {
+				Column(
+					modifier = Modifier.padding(16.dp)
+				) {
+					var painter = painterResource(id = R.drawable.logo_header_home)
+
+					Image(
+						painter = painter, contentDescription = null, contentScale = ContentScale.FillHeight,
+
+						modifier = Modifier
+						.fillMaxWidth()
+							.height(85.dp)
+					)
+					Spacer(modifier = Modifier.height(60.dp))
+
+					ListTile(
+						title = "Charts",
+
+						onClick = {
+							scope.launch{
+								drawerState.close()
+							}
+							navController.navigate("charts")
+						}
+					)
+
+					ListTile(
+						title = "Web View",
+						onClick = {
+							scope.launch{
+								drawerState.close()
+							}
+							val url  = "https://www.youtube.com"
+							val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
+							navController.navigate("webview/$encodedUrl")
+						}
+					)
+
+					ListTile(
+						title = "Download Manager",
+
+						onClick = {
+							scope.launch{
+								drawerState.close()
+							}
+							navController.navigate("download")
+						}
+					)
+
+					Spacer(modifier = Modifier.height(10.dp))
+
+				}
+			}
+			},
+	) {
+		Scaffold(
+			contentWindowInsets = WindowInsets(0.dp),
+			topBar = {
+				CommonAppBar(navController = navController, showImage = true,
+
+					onNavigationIconClick = {
+						scope.launch {
+							if (drawerState.isOpen) {
+								drawerState.close()
+							} else {
+								drawerState.open()
+							}
+						}
+					}
+				)
+			}
+
+		) { innerPadding ->
+			Column(
+				modifier = Modifier
+					.padding(innerPadding)
+					.padding(start = 15.dp, end = 15.dp, top = 15.dp, bottom = 0.dp)
+					.fillMaxSize()
+					.verticalScroll(scrollState),
+
+				horizontalAlignment = Alignment.Start
+			) {
+				TopImageSection()
+				Text("Welcome".uppercase(), style = MaterialTheme.typography.titleMedium)
+				Text(
+					"Let\'s get started", style = MaterialTheme.typography.titleLarge
+				)
+				ActionItems()
+				HowItWorksSection()
+				CommonYellowButton(modifier = Modifier
+					.fillMaxWidth()
+					.padding(top = 15.dp, bottom = 30.dp),
+					text = "GET STARTED",
+					onClick = {
+
+
+					})
+
+
+			}
 		}
 	}
 	
 	
 }
+
+
+
 
 @Composable
 fun HowItWorksSection() {
@@ -100,7 +200,7 @@ fun HowItWorksSection() {
 			.background(
 				color = Color.Gray, shape = RoundedCornerShape(25.dp)
 			)
-			.clip( RoundedCornerShape(25.dp))
+			.clip(RoundedCornerShape(25.dp))
 	      
 	      ) {
 		//Text("dsd")

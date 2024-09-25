@@ -22,7 +22,13 @@ import com.example.travelapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CommonAppBar(  navController: NavHostController, showImage: Boolean = false, title: String = "") {
+fun CommonAppBar(  navController: NavHostController, showImage: Boolean = false, title: String = "",
+
+//				   onNavigationIconClick: () -> Unit
+
+				   onNavigationIconClick: (() -> Unit)? = null
+
+				   ) {
 	CenterAlignedTopAppBar(
 
 		
@@ -68,6 +74,8 @@ fun CommonAppBar(  navController: NavHostController, showImage: Boolean = false,
 			}
 			
 		}, actions = {
+
+
 			var painter = painterResource(id = R.drawable.menu_icon_png)
 			
 			Image(
@@ -75,6 +83,13 @@ fun CommonAppBar(  navController: NavHostController, showImage: Boolean = false,
 				
 				modifier = Modifier
 					.width(25.dp)
-					.height(25.dp))
+					.height(25.dp)
+					.clickable{
+						if (onNavigationIconClick != null) {
+							onNavigationIconClick()
+						}
+					}
+			)
+
 		})
 }

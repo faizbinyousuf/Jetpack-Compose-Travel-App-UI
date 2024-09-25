@@ -66,7 +66,12 @@ dependencies {
 	//firebase messaging dependcency
 	implementation("com.google.firebase:firebase-messaging")
 
-	// Data store dependency (|advcanced version of SharedPreferences)
+
+	//firestore	dependency
+	implementation("com.google.firebase:firebase-firestore")
+
+
+	// Data store dependency (advcanced version of SharedPreferences)
 	implementation("androidx.datastore:datastore-preferences:1.0.0")
 	
 
@@ -81,6 +86,11 @@ dependencies {
 // import coil library
 
 	implementation("io.coil-kt:coil-compose:2.7.0")
+
+	// charts library
+
+
+	implementation ("co.yml:ycharts:2.1.0")
 
 
 
